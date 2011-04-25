@@ -6,6 +6,21 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		889E273F136571CF0041D4F3 /* libetpan-iOSUniversal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 889E2742136571CF0041D4F3 /* Build configuration list for PBXAggregateTarget "libetpan-iOSUniversal" */;
+			buildPhases = (
+				889E2744136571D80041D4F3 /* Build sim and device libs */,
+				889E2745136572340041D4F3 /* Build universal libs */,
+			);
+			dependencies = (
+			);
+			name = "libetpan-iOSUniversal";
+			productName = "libetpan-iOSUniversal";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		C6451AFE1083D316003135FD /* mailimf_write.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F9EA32105335BC0059C3BA /* mailimf_write.h */; };
 		C6451AFF1083D316003135FD /* mhdriver_cached.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F9E913105335BC0059C3BA /* mhdriver_cached.h */; };
@@ -2543,6 +2558,7 @@
 				8DC2EF4F0486A6940098B216 /* libetpan */,
 				C69AB10910546FE500F32FBD /* static libetpan */,
 				C6DC64B010829E8300FA050B /* static libetpan iphone */,
+				889E273F136571CF0041D4F3 /* libetpan-iOSUniversal */,
 			);
 		};
 /* End PBXProject section */
@@ -2556,6 +2572,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		889E2744136571D80041D4F3 /* Build sim and device libs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build sim and device libs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator4.3 -target \"static libetpan iphone\" -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos4.3 -target \"static libetpan iphone\" -configuration ${CONFIGURATION} clean build\nexit 0";
+		};
+		889E2745136572340041D4F3 /* Build universal libs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build universal libs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# set environment\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/libetpan-iphone.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libetpan-iphone.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/lib$libetpan-iphone.a\" &&\n\n# Create framework directory structure.\n\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers/${PROJECT_NAME}\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DC2EF540486A6940098B216 /* Sources */ = {
@@ -3106,6 +3153,20 @@
 			};
 			name = Release;
 		};
+		889E2740136571CF0041D4F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		889E2741136571CF0041D4F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C69AB10B10546FE600F32FBD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3196,6 +3257,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		889E2742136571CF0041D4F3 /* Build configuration list for PBXAggregateTarget "libetpan-iOSUniversal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				889E2740136571CF0041D4F3 /* Debug */,
+				889E2741136571CF0041D4F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C69AB10D1054700400F32FBD /* Build configuration list for PBXNativeTarget "static libetpan" */ = {
 			isa = XCConfigurationList;
