@@ -306,7 +306,7 @@ static struct mailstream_ssl_data * ssl_data_new_full(int fd, const SSL_METHOD *
   
   mailstream_ssl_init();
   
-  tmp_ctx = SSL_CTX_new(method);
+  tmp_ctx = SSL_CTX_new((SSL_METHOD *)method);
   if (tmp_ctx == NULL)
     goto err;
   
