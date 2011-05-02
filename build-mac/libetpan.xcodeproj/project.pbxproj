@@ -2824,7 +2824,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# set environment\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/libetpan-iphone.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libetpan-iphone.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/lib$libetpan-iphone.a\" &&\n\n# Create framework directory structure.\n\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers/${PROJECT_NAME}\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\"";
+			shellScript = "# set environment\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/libetpan-iphone.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/libetpan-iphone.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/libetpan-iphone.a\" &&\n\n# Create framework directory structure.\n\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers/${PROJECT_NAME}\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3442,6 +3442,7 @@
 					"\"$(SRCROOT)/lib/OpenSSL\"",
 					"\"$(SRCROOT)/lib/SASL\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "etpan-iphone";
 				SDKROOT = iphoneos;
