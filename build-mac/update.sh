@@ -18,6 +18,7 @@ cp ../libetpan-config.h ${ROOTDIR}/include
 sed -i.original 's/^#define HAVE_CURL 1$/\/\/#define HAVE_CURL 1/' ${ROOTDIR}/include/config.h
 sed -i '' 's/^\#define HAVE_EXPAT 1/\/\/\#define HAVE_EXPAT 1/g' ${ROOTDIR}/include/config.h
 
+rm -rf SASL-SSL-for-iOS
 git clone git://github.com/miyabichan/SASL-SSL-for-iOS.git
 
 pushd SASL-SSL-for-iOS
@@ -26,3 +27,4 @@ popd
 
 rm -rf lib
 cp -R ${ROOTDIR}/SASL-SSL-for-iOS/lib .
+rm -rf SASL-SSL-for-iOS
