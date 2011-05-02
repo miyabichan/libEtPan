@@ -1,5 +1,4 @@
 #!/bin/sh
-OPENSSL_VERSION=1.0.0d
 
 if test ! -d libetpan.xcodeproj ; then
 	exit 1;
@@ -12,16 +11,18 @@ cd ..
 make stamp-prepare-target
 make libetpan-config.h
 cd build-mac
-mkdir -p include/libetpan
-cp -r ../include/libetpan/ include/libetpan/
-cp ../config.h include
-cp ../libetpan-config.h include
-mkdir -p OpenSSL
-cd OpenSSL
-curl -O http://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz
-tar xzvf openssl-$OPENSSL_VERSION.tar.gz
-mv openssl-$OPENSSL_VERSION/* .
-rm -rf openssl-$OPENSSL_VERSION
-cd ${ROOTDIR}
+mkdir -p ${ROOTDIR}/include/libetpan
+cp -r ../include/libetpan/ ${ROOTDIR}/include/libetpan/
+cp ../config.h ${ROOTDIR}/include
+cp ../libetpan-config.h ${ROOTDIR}/include
 sed -i.original 's/^#define HAVE_CURL 1$/\/\/#define HAVE_CURL 1/' ${ROOTDIR}/include/config.h
 sed -i '' 's/^\#define HAVE_EXPAT 1/\/\/\#define HAVE_EXPAT 1/g' ${ROOTDIR}/include/config.h
+
+git clone git://github.com/miyabichan/SASL-SSL-for-iOS.git
+
+pushd SASL-SSL-for-iOS
+sh ./build-libraries.sh
+popd
+
+rm -rf lib
+cp -R ${ROOTDIR}/SASL-SSL-for-iOS/lib .
