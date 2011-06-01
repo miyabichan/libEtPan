@@ -3111,7 +3111,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "UNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\n\ncp -R \"${SRCROOT}/lib/OpenSSL/Headers/\" \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\ncp -R \"${SRCROOT}/lib/SASL/Headers/\" \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\n\nrm -rf \"${SRCROOT}/lib/libetpan\" &&\nmkdir -p \"${SRCROOT}/lib/libetpan\" &&\ncp -R \"${UNIVERSAL_LIBRARY_DIR}/\" \"${SRCROOT}/lib/libetpan\"";
+			shellScript = "UNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\n\ncp -R \"${SRCROOT}/lib/OpenSSL/Headers/\" \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\ncp -R \"${SRCROOT}/lib/SASL/Headers/\" \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\n\nrm -rf \"${SRCROOT}/lib/libetpan\" &&\nmkdir -p \"${SRCROOT}/lib/libetpan\" &&\ncp -R \"${UNIVERSAL_LIBRARY_DIR}/\" \"${SRCROOT}/lib/libetpan\" &&\nmv \"${SRCROOT}/lib/libetpan/libetpan-iphone.a\" \"${SRCROOT}/lib/libetpan/libetpan.a\"";
 		};
 		889E2744136571D80041D4F3 /* Build sim and device libs */ = {
 			isa = PBXShellScriptBuildPhase;
